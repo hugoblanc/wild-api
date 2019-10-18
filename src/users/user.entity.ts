@@ -1,1 +1,1 @@
-export class User.Entity {}
+export class User {}
