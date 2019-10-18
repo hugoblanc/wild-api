@@ -18,7 +18,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "postinstall": " copyfiles --flat .githooks/* .git/hooks/"
+    "postinstall": " copyfiles --flat .githooks/* .git/hooks/",
+    "release": "standard-version"
   },
   "dependencies": {
     "@nestjs/common": "^6.7.2",
