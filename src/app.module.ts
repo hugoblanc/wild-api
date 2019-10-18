@@ -7,6 +7,7 @@ import { FlashcardsModule } from './flashcards/flashcards.module';
 import { TicketsModule } from './tickets/tickets.module';
 import { TopicsModule } from './topics/topics.module';
 import { EventsModule } from './events/events.module';
+import { CoreModule } from './core/core.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { EventsModule } from './events/events.module';
     TicketsModule,
     TopicsModule,
     EventsModule,
+    CoreModule,
   ],
   controllers: [AppController],
   providers: [AppService],
