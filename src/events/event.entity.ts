@@ -17,10 +17,10 @@ export class Event {
   @Column({ length: 200 })
   imageUrl: string;
 
-  @Column({ type: 'timestamp' })
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   startAt: Date;
 
-  @Column({ type: 'timestamp' })
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   endAt: Date;
 
   //   npm install --save sequelize sequelize-typescript mysql2
