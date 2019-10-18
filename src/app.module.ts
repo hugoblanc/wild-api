@@ -13,7 +13,7 @@ import { EventsModule } from './events/events.module';
     TypeOrmModule.forRoot({
       type: '**',
       host: 'i****c.com',
-      port:  ** ** ,
+      port:  '** **' ,
       username: '*****',
       password: '****',
       database: '****',
