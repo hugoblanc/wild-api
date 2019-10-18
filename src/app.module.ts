@@ -11,12 +11,12 @@ import { EventsModule } from './events/events.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: '**',
-      host: 'i****c.com',
-      port:  '** **' ,
-      username: '*****',
-      password: '****',
-      database: '****',
+      type: 'mysql',
+      host: process.env.WILD_DB_HOST,
+      port: parseInt(process.env.WILD_DB_PORT, 10),
+      username: process.env.WILD_DB_USER,
+      password: process.env.WILD_DB_PASSWORD,
+      database: 'wild',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
       extra: {
