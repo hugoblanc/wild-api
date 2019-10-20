@@ -1,6 +1,7 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 import { AbstractEntity } from '../core/abstract/abstract.entity';
 import { ApiModelProperty } from '@nestjs/swagger';
+import { User } from '../users/user.entity';
 
 @Entity()
 export class Flashcard extends AbstractEntity {
@@ -12,5 +13,9 @@ export class Flashcard extends AbstractEntity {
     @ApiModelProperty()
     @Column({ length: 200 })
     imageUrl: string;
+
+    @ApiModelProperty({type: User})
+    @ManyToOne(type => User, user => user.flashcards)
+    user: User;
 
 }
