@@ -1,37 +1,21 @@
 
-import { CreatedAt, UpdatedAt } from 'sequelize-typescript';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity } from 'typeorm';
+import { AbstractEntity } from '../core/abstract/abstract.entity';
+import { ApiModelProperty } from '@nestjs/swagger';
 
 @Entity()
-export class Event {
+export class Event extends AbstractEntity {
 
-  @PrimaryGeneratedColumn()
-  id: number;
+    @ApiModelProperty()
+    @Column({ length: 200 })
+    imageUrl: string;
 
-  @Column({ length: 200 })
-  title: string;
+    @ApiModelProperty()
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    startAt: Date;
 
-  @Column({ type: 'longtext' })
-  description: string;
+    @ApiModelProperty()
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    endAt: Date;
 
-  @Column({ length: 200 })
-  imageUrl: string;
-
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  startAt: Date;
-
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  endAt: Date;
-
-  //   npm install --save sequelize sequelize-typescript mysql2
-  // npm install --save-dev @types/sequelize
-
-  @CreatedAt public createdAt: Date;
-
-  @UpdatedAt public updatedAt: Date;
-
-  //   @DeletedAt public deletedAt: Date;
-
-  // rattaché a un groupe ?
-  // catégorie ou tag ?
 }

@@ -1,30 +1,12 @@
-import { CreatedAt, UpdatedAt } from 'sequelize-typescript';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity } from 'typeorm';
+import { AbstractEntity } from '../core/abstract/abstract.entity';
+import { ApiModelProperty } from '@nestjs/swagger';
 
 @Entity()
-export class Topic {
+export class Topic extends AbstractEntity {
 
-  @PrimaryGeneratedColumn()
-  id: number;
+    @ApiModelProperty()
+    @Column({ length: 150 })
+    resourceUrl: string;
 
-  @Column({ length: 40 })
-  title: string;
-
-  @Column({ length: 150 })
-  description: string;
-
-  @Column({ length: 150 })
-  resourceUrl: string;
-
-//   npm install --save sequelize sequelize-typescript mysql2
-// npm install --save-dev @types/sequelize
-
-  @CreatedAt public createdAt: Date;
-
-  @UpdatedAt public updatedAt: Date;
-
-//   @DeletedAt public deletedAt: Date;
-
-// rattaché a un groupe ?
-// catégorie ou tag ?
 }
