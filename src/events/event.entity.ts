@@ -10,11 +10,11 @@ export class Event extends AbstractEntity {
     @Column({ length: 200 })
     imageUrl: string;
 
-    @ApiModelProperty()
+    @ApiModelProperty({ type: 'string', format: 'date-time', example: '2018-11-21T06:20:32.232Z' })
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     startAt: Date;
 
-    @ApiModelProperty()
+    @ApiModelProperty({ type: 'string', format: 'date-time', example: '2018-11-21T06:20:32.232Z' })
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     endAt: Date;
 
