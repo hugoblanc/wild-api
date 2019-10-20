@@ -1,6 +1,7 @@
 import { CreatedAt, UpdatedAt } from 'sequelize-typescript';
-import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
 import { ApiModelProperty } from '@nestjs/swagger';
+import { Group } from '../../groups/group.entity';
 
 export class AbstractEntity {
 
@@ -25,5 +26,10 @@ export class AbstractEntity {
     @UpdatedAt
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     updatedAt: Date;
+
+    @ApiModelProperty({ type: [Group] })
+    @ManyToMany(type => Group)
+    @JoinTable()
+    groups: Group[];
 
 }
