@@ -1,31 +1,26 @@
-import { AbstractEntity } from './abstract.entity';
-import { Injectable, Logger } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Event } from 'src/events/event.entity';
 import { Repository } from 'typeorm';
+import { Logger } from '@nestjs/common';
 
-@Injectable()
-export class AbstractService<T extends AbstractEntity> {
-    private readonly logger = new Logger(AbstractService.name);
+export abstract class AbstractService {
 
-    constructor(
-        @InjectRepository(AbstractEntity)
-        private readonly abstractRepository: Repository<T>,
-    ) { }
+    abstract logger: Logger;
 
-    save(content: T): Promise<T> {
+    constructor(private readonly abstractRepository: Repository<any>) {
+
+    }
+
+    save(content: any): Promise<any> {
         // this.logger.log('Save Content contentId: ' + content.contentId);
         return this.abstractRepository.save(content);
     }
 
-    findAll(): Promise<T[]> {
+    findAll(): Promise<any[]> {
         return this.abstractRepository.find();
     }
 
-    findById(id: number): Promise<T> {
+    findById(id: number): Promise<any> {
         this.logger.log('Find content by id: ' + id);
         return this.abstractRepository.findOne({ where: { id } });
     }
-
 
 }

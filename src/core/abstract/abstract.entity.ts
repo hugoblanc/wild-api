@@ -16,12 +16,12 @@ export class AbstractEntity {
     @Column({ type: 'longtext' })
     description: string;
 
-    @ApiModelProperty()
+    @ApiModelProperty({ type: 'string', format: 'date-time', example: '2018-11-21T06:20:32.232Z' })
     @CreatedAt
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     createdAt: Date;
 
-    @ApiModelProperty()
+    @ApiModelProperty({ type: 'string', format: 'date-time', example: '2018-11-21T06:20:32.232Z' })
     @UpdatedAt
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     updatedAt: Date;
