@@ -1,6 +1,7 @@
-import { CreatedAt, UpdatedAt } from 'sequelize-typescript';
-import { Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
 import { ApiModelProperty } from '@nestjs/swagger';
+import { IsNotEmpty } from 'class-validator';
+import { CreatedAt, UpdatedAt } from 'sequelize-typescript';
+import { Column, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Group } from '../../groups/group.entity';
 
 export class AbstractEntity {
@@ -11,10 +12,12 @@ export class AbstractEntity {
 
     @ApiModelProperty()
     @Column({ length: 200 })
+    @IsNotEmpty()
     title: string;
 
     @ApiModelProperty()
     @Column({ type: 'longtext' })
+    @IsNotEmpty()
     description: string;
 
     @ApiModelProperty({ type: 'string', format: 'date-time', example: '2018-11-21T06:20:32.232Z' })
