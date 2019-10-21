@@ -19,7 +19,7 @@ export class Event extends AbstractEntity {
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     endAt: Date;
 
-    @ApiModelProperty({ type: User, required: false })
+    @ApiModelProperty({ type: User})
     @ManyToOne(type => User, user => user.events)
     user: User;
 
