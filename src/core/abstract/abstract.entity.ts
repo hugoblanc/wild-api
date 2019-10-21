@@ -1,14 +1,12 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 import { CreatedAt, UpdatedAt } from 'sequelize-typescript';
-import { Column, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Group } from '../../groups/group.entity';
+import { Column, PrimaryGeneratedColumn } from 'typeorm';
 
 export class AbstractEntity {
 
-    @ApiModelProperty()
+    @ApiModelProperty({ required: false })
     @PrimaryGeneratedColumn()
-    @IsNumber()
     id: number;
 
     @ApiModelProperty()
@@ -30,10 +28,5 @@ export class AbstractEntity {
     @UpdatedAt
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     updatedAt: Date;
-
-    @ApiModelProperty({ type: [Group] })
-    @ManyToMany(type => Group)
-    @JoinTable()
-    groups: Group[];
 
 }
