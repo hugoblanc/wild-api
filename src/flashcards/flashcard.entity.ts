@@ -2,6 +2,7 @@ import { Column, Entity, ManyToOne } from 'typeorm';
 import { AbstractEntity } from '../core/abstract/abstract.entity';
 import { ApiModelProperty } from '@nestjs/swagger';
 import { User } from '../users/user.entity';
+import { IsNotEmpty } from 'class-validator';
 
 @Entity()
 export class Flashcard extends AbstractEntity {
@@ -16,6 +17,7 @@ export class Flashcard extends AbstractEntity {
 
     @ApiModelProperty({ type: User, required: false })
     @ManyToOne(type => User, user => user.flashcards)
+    @IsNotEmpty()
     user: User;
 
 }

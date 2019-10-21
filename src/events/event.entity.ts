@@ -1,9 +1,9 @@
 
+import { ApiModelProperty } from '@nestjs/swagger';
+import { IsNotEmpty } from 'class-validator';
 import { Column, Entity, ManyToOne } from 'typeorm';
 import { AbstractEntity } from '../core/abstract/abstract.entity';
-import { ApiModelProperty } from '@nestjs/swagger';
 import { User } from '../users/user.entity';
-import { IsNotEmpty } from 'class-validator';
 
 @Entity()
 export class Event extends AbstractEntity {
@@ -22,8 +22,9 @@ export class Event extends AbstractEntity {
     @IsNotEmpty()
     endAt: Date;
 
-    @ApiModelProperty({ type: User})
+    @ApiModelProperty({ type: User })
     @ManyToOne(type => User, user => user.events)
+    @IsNotEmpty()
     user: User;
 
 }

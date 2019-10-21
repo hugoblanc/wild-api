@@ -1,5 +1,5 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsNumber } from 'class-validator';
 import { CreatedAt, UpdatedAt } from 'sequelize-typescript';
 import { Column, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Group } from '../../groups/group.entity';
@@ -8,6 +8,7 @@ export class AbstractEntity {
 
     @ApiModelProperty()
     @PrimaryGeneratedColumn()
+    @IsNumber()
     id: number;
 
     @ApiModelProperty()
