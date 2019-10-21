@@ -1,5 +1,7 @@
-import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
+import { ApiModelProperty } from '@nestjs/swagger';
+import { IsNotEmpty } from 'class-validator';
 import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+
 import { Event } from '../events/event.entity';
 import { Flashcard } from '../flashcards/flashcard.entity';
 import { Group } from '../groups/group.entity';
@@ -15,10 +17,12 @@ export class User {
 
     @ApiModelProperty()
     @Column({ length: 30 })
+    @IsNotEmpty()
     firstname: string;
 
     @ApiModelProperty()
     @Column({ length: 30 })
+    @IsNotEmpty()
     lastname: string;
 
     @ApiModelProperty({ type: [Group], required: false })
