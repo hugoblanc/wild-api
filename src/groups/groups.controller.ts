@@ -2,7 +2,9 @@ import { Controller, Body, Post, Get, Param } from '@nestjs/common';
 import { AbstractController } from '../core/abstract/abstract.controller';
 import { GroupsService } from './groups.service';
 import { Group } from './group.entity';
+import { ApiUseTags } from '@nestjs/swagger';
 
+@ApiUseTags('users')
 @Controller('groups')
 export class GroupsController extends AbstractController<Group> {
     constructor(private readonly groupsService: GroupsService) {

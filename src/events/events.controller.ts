@@ -2,7 +2,9 @@ import { Controller, Body, Post, Get, Param } from '@nestjs/common';
 import { EventsService } from './events.service';
 import { Event } from './event.entity';
 import { AbstractController } from '../core/abstract/abstract.controller';
+import { ApiUseTags } from '@nestjs/swagger';
 
+@ApiUseTags('events')
 @Controller('events')
 export class EventsController extends AbstractController<Event> {
 

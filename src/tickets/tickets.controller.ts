@@ -1,8 +1,10 @@
-import { Controller, Post, Body, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { ApiUseTags } from '@nestjs/swagger';
 import { AbstractController } from '../core/abstract/abstract.controller';
 import { Ticket } from './ticket.entity';
 import { TicketsService } from './tickets.service';
 
+@ApiUseTags('tickets')
 @Controller('tickets')
 export class TicketsController extends AbstractController<Ticket> {
 

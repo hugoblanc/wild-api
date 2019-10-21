@@ -14,7 +14,7 @@ export class Flashcard extends AbstractEntity {
     @Column({ length: 200 })
     imageUrl: string;
 
-    @ApiModelProperty({type: User})
+    @ApiModelProperty({ type: User, required: false })
     @ManyToOne(type => User, user => user.flashcards)
     user: User;
 

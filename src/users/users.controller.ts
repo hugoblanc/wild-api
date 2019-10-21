@@ -2,7 +2,9 @@ import { Controller, Post, Body, Get, Param } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './user.entity';
 import { AbstractController } from '../core/abstract/abstract.controller';
+import { ApiUseTags } from '@nestjs/swagger';
 
+@ApiUseTags('users', 'tickets', 'flashcards', 'events', 'topics')
 @Controller('users')
 export class UsersController extends AbstractController<User> {
 

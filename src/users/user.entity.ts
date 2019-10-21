@@ -9,7 +9,7 @@ import { Topic } from '../topics/topic.entity';
 @Entity()
 export class User {
 
-    @ApiModelProperty()
+    @ApiModelProperty({ required: false })
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -21,28 +21,24 @@ export class User {
     @Column({ length: 30 })
     lastname: string;
 
-    @ApiModelProperty({ type: [Group] })
+    @ApiModelProperty({ type: [Group], required: false })
     @ManyToMany(type => Group)
     @JoinTable()
     groups: Group[];
 
-    @ApiModelProperty({ type: [Ticket] })
-    @ApiModelPropertyOptional()
+    @ApiModelProperty({ type: [Ticket], required: false })
     @OneToMany(type => Ticket, ticket => ticket.user)
     tickets: Ticket[];
 
-    @ApiModelProperty({ type: [Event] })
-    @ApiModelPropertyOptional()
+    @ApiModelProperty({ type: [Event], required: false })
     @OneToMany(type => Event, event => event.user)
     events: Event[];
 
-    @ApiModelProperty({ type: [Flashcard] })
-    @ApiModelPropertyOptional()
+    @ApiModelProperty({ type: [Flashcard], required: false })
     @OneToMany(type => Flashcard, flashcard => flashcard.user)
     flashcards: Flashcard[];
 
-    @ApiModelProperty({ type: [Topic] })
-    @ApiModelPropertyOptional()
+    @ApiModelProperty({ type: [Topic], required: false })
     @OneToMany(type => Topic, topic => topic.user)
     topics: Topic[];
 }

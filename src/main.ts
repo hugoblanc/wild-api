@@ -11,9 +11,8 @@ async function bootstrap() {
   // Swagger
   const options = new DocumentBuilder()
     .setTitle('Documentation api centrale')
-    .setDescription('Cette api permet de coordonner les différents services utilisé par likewatt')
+    .setDescription('Cette api permet de coordonner les différents services utilisé par wild api')
     .setVersion('1.0')
-    .addTag('central')
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);

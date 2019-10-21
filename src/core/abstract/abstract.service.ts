@@ -1,5 +1,6 @@
 import { Repository } from 'typeorm';
 import { Logger } from '@nestjs/common';
+import e = require('express');
 
 export abstract class AbstractService {
 
@@ -20,7 +21,11 @@ export abstract class AbstractService {
 
     findById(id: number): Promise<any> {
         this.logger.log('Find content by id: ' + id);
-        return this.abstractRepository.findOne({ where: { id } });
+        try {
+            return this.abstractRepository.findOne({ where: { id } });
+        } catch (e) {
+            throw e;
+        }
     }
 
 }

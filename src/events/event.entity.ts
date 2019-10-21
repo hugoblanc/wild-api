@@ -7,7 +7,7 @@ import { User } from '../users/user.entity';
 @Entity()
 export class Event extends AbstractEntity {
 
-    @ApiModelProperty()
+    @ApiModelProperty({ required: false })
     @Column({ length: 200 })
     imageUrl: string;
 
@@ -19,7 +19,7 @@ export class Event extends AbstractEntity {
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     endAt: Date;
 
-    @ApiModelProperty({type: User})
+    @ApiModelProperty({ type: User, required: false })
     @ManyToOne(type => User, user => user.events)
     user: User;
 
