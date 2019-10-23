@@ -38,7 +38,7 @@ export class User {
     events: Event[];
 
     @ApiModelProperty({ type: [Flashfolder], required: false })
-    @OneToMany(type => Flashfolder, flashfolder => flashfolder.group)
+    @OneToMany(type => Flashfolder, flashfolder => flashfolder.user)
     flashfolders: Flashfolder[];
 
     @ApiModelProperty({ type: [Topic], required: false })

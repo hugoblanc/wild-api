@@ -3,6 +3,7 @@ import { IsNotEmpty } from 'class-validator';
 import { Column, Entity, ManyToOne } from 'typeorm';
 import { AbstractEntity } from '../../core/abstract/abstract.entity';
 import { User } from '../../users/user.entity';
+import { Flashfolder } from '../folders/flashfolder.entity';
 
 @Entity()
 export class Flashcard extends AbstractEntity {
@@ -15,5 +16,8 @@ export class Flashcard extends AbstractEntity {
     @Column({ length: 200 })
     imageUrl: string;
 
-
+    @ApiModelProperty({ type: Flashfolder })
+    @ManyToOne(type => Flashfolder, flashfolder => flashfolder.flashcards, { cascade: ['insert', 'update'] })
+    @IsNotEmpty()
+    flashfolder: Flashfolder;
 }
