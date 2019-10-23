@@ -1,12 +1,12 @@
 import { Body, Get, Logger, Param, Post } from '@nestjs/common';
 import { AbstractService } from './abstract.service';
 
-export class AbstractController<T> {
+export class AbstractController<T, K> {
 
     private readonly logger = new Logger(AbstractController.name);
     constructor(private abstractService: AbstractService) { }
 
-    async create(abstractEntity: T): Promise<T> {
+    async create(abstractEntity: K): Promise<T> {
         return this.abstractService.save(abstractEntity);
     }
 

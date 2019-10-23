@@ -1,3 +1,4 @@
+import { EventDto } from './event-dto';
 import { Body, Controller, Get, Param, Post, HttpStatus } from '@nestjs/common';
 import { ApiResponse, ApiUseTags } from '@nestjs/swagger';
 import { AbstractController } from '../core/abstract/abstract.controller';
@@ -6,7 +7,7 @@ import { EventsService } from './events.service';
 
 @ApiUseTags('events')
 @Controller('events')
-export class EventsController extends AbstractController<Event> {
+export class EventsController extends AbstractController<Event, EventDto> {
 
     constructor(private readonly eventService: EventsService) {
         super(eventService);
@@ -14,7 +15,7 @@ export class EventsController extends AbstractController<Event> {
 
     @Post()
     @ApiResponse({ status: HttpStatus.CREATED, type: Event })
-    async create(@Body() event: Event): Promise<Event> {
+    async create(@Body() event: EventDto) {
         return super.create(event);
     }
 
