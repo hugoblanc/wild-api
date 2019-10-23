@@ -1,17 +1,17 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { Topic } from './topic.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
 import { Repository } from 'typeorm';
-import { AbstractService } from '../core/abstract/abstract.service';
+import { Topic } from './topic.entity';
 
 @Injectable()
-export class TopicsService extends AbstractService {
+export class TopicsService extends TypeOrmCrudService<Topic> {
 
     readonly logger = new Logger(TopicsService.name);
     constructor(
         @InjectRepository(Topic)
-        private readonly topicRepository: Repository<Topic>,
+        private readonly repository: Repository<Topic>,
     ) {
-        super(topicRepository);
+        super(repository);
     }
 }

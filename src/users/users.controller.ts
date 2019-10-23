@@ -5,7 +5,7 @@ import { AbstractController } from '../core/abstract/abstract.controller';
 import { ApiUseTags } from '@nestjs/swagger';
 import { UserDto } from './user-dto';
 
-@ApiUseTags('users', 'tickets', 'flashcards', 'events', 'topics')
+@ApiUseTags('users')
 @Controller('users')
 export class UsersController extends AbstractController<User, UserDto> {
 

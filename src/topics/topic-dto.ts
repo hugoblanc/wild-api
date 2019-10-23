@@ -1,9 +1,13 @@
-import { AbstractDto } from '../core/abstract/abstract-dto';
+import { AbstractDto } from './../core/abstract/abstract-dto';
 import { ApiModelProperty } from '@nestjs/swagger';
-import { UserDto } from '../users/user-dto';
 import { GroupDto } from '../groups/group-dto';
+import { UserDto } from '../users/user-dto';
 
-export class TicketDto extends AbstractDto {
+export class TopicDto extends AbstractDto {
+
+    @ApiModelProperty()
+    resourceUrl: string;
+
     @ApiModelProperty({ type: UserDto })
     user: UserDto;
 

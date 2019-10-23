@@ -27,7 +27,7 @@ export class Event extends AbstractEntity {
     @ApiModelProperty({ type: User })
     user: User;
 
-    @ApiModelProperty({ type: Group })
+    // @ApiModelProperty({ type: Group })
     @ManyToOne(type => Group, group => group.events, { cascade: ['insert', 'update'] })
     @IsNotEmpty()
     group: Group;

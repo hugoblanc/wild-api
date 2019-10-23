@@ -1,8 +1,5 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-
-import { UserDto } from 'src/users/user-dto';
-
-import { GroupDto } from 'src/groups/group-dto';
+import { UserDto } from '../../users/user-dto';
 
 export class FlashcardDto {
 
@@ -12,9 +9,7 @@ export class FlashcardDto {
     @ApiModelProperty({ required: false })
     imageUrl?: string;
 
-    @ApiModelProperty({ type: 'any' })
+    @ApiModelProperty({ type: UserDto })
     user: UserDto;
 
-    @ApiModelProperty({ type: GroupDto })
-    group: GroupDto;
 }

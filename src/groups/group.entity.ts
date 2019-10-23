@@ -1,9 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { ApiModelProperty } from '@nestjs/swagger';
-import { Ticket } from '../tickets/ticket.entity';
-import { Flashcard } from '../flashcards/flashcard.entity';
-import { Topic } from '../topics/topic.entity';
+import { Flashfolder } from '../flashcards/folders/flashfolder.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Event } from '../events/event.entity';
+import { Ticket } from '../tickets/ticket.entity';
+import { Topic } from '../topics/topic.entity';
 
 @Entity()
 export class Group {
@@ -30,9 +30,9 @@ export class Group {
     @OneToMany(type => Event, event => event.group)
     events: Event[];
 
-    @ApiModelProperty({ type: [Flashcard], required: false })
-    @OneToMany(type => Flashcard, flashcard => flashcard.group)
-    flashcards: Flashcard[];
+    @ApiModelProperty({ type: [Flashfolder], required: false })
+    @OneToMany(type => Flashfolder, flashfolder => flashfolder.group)
+    flashfolders: Flashfolder[];
 
     @ApiModelProperty({ type: [Topic], required: false })
     @OneToMany(type => Topic, topic => topic.group)
