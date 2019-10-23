@@ -15,6 +15,7 @@ async function bootstrap() {
     .setTitle('Documentation api centrale')
     .setDescription('Cette api permet de coordonner les différents services utilisé par wild api')
     .setVersion('1.0')
+    .setSchemes('https')
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
