@@ -3,16 +3,17 @@ import { AbstractController } from '../core/abstract/abstract.controller';
 import { GroupsService } from './groups.service';
 import { Group } from './group.entity';
 import { ApiUseTags } from '@nestjs/swagger';
+import { GroupDto } from './group-dto';
 
 @ApiUseTags('users')
 @Controller('groups')
-export class GroupsController extends AbstractController<Group> {
+export class GroupsController extends AbstractController<Group, GroupDto> {
     constructor(private readonly groupsService: GroupsService) {
         super(groupsService);
     }
 
     @Post()
-    async create(@Body() group: Group) {
+    async create(@Body() group: GroupDto) {
         return super.create(group);
     }
 

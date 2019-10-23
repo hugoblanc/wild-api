@@ -3,17 +3,18 @@ import { UsersService } from './users.service';
 import { User } from './user.entity';
 import { AbstractController } from '../core/abstract/abstract.controller';
 import { ApiUseTags } from '@nestjs/swagger';
+import { UserDto } from './user-dto';
 
-@ApiUseTags('users', 'tickets', 'flashcards', 'events', 'topics')
+@ApiUseTags('users')
 @Controller('users')
-export class UsersController extends AbstractController<User> {
+export class UsersController extends AbstractController<User, UserDto> {
 
     constructor(private readonly userService: UsersService) {
         super(userService);
     }
 
     @Post()
-    async create(@Body() user: User) {
+    async create(@Body() user: UserDto) {
         return super.create(user);
     }
 

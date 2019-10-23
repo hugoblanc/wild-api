@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
-import { FlashcardsService } from './flashcards.service';
-import { FlashcardsController } from './flashcards.controller';
-import { Flashcard } from './flashcard.entity';
+import { FlashcardsService } from './flashcards/flashcards.service';
+import { FlashcardsController } from './flashcards/flashcards.controller';
+import { Flashcard } from './flashcards/flashcard.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Flashfolder } from './folders/flashfolder.entity';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Flashcard])],
+    imports: [TypeOrmModule.forFeature([Flashcard, Flashfolder])],
     providers: [FlashcardsService],
-    controllers: [FlashcardsController]
+    controllers: [FlashcardsController],
 })
 export class FlashcardsModule { }

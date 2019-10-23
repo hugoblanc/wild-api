@@ -1,12 +1,11 @@
 import { ApiModelProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-
 import { Event } from '../events/event.entity';
-import { Flashcard } from '../flashcards/flashcard.entity';
 import { Group } from '../groups/group.entity';
 import { Ticket } from '../tickets/ticket.entity';
 import { Topic } from '../topics/topic.entity';
+import { Flashfolder } from './../flashcards/folders/flashfolder.entity';
 
 @Entity()
 export class User {
@@ -38,9 +37,9 @@ export class User {
     @OneToMany(type => Event, event => event.user)
     events: Event[];
 
-    @ApiModelProperty({ type: [Flashcard], required: false })
-    @OneToMany(type => Flashcard, flashcard => flashcard.user)
-    flashcards: Flashcard[];
+    @ApiModelProperty({ type: [Flashfolder], required: false })
+    @OneToMany(type => Flashfolder, flashfolder => flashfolder.group)
+    flashfolders: Flashfolder[];
 
     @ApiModelProperty({ type: [Topic], required: false })
     @OneToMany(type => Topic, topic => topic.user)
