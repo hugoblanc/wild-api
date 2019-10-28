@@ -1,18 +1,43 @@
+import { OauthResponse } from './oauth-response';
 import { Injectable, HttpService } from '@nestjs/common';
-import { map } from 'rxjs/operators';
+import { map, flatMap } from 'rxjs/operators';
 import querystring = require('querystring');
+import { AxiosRequestConfig } from 'axios';
 
 @Injectable()
 export class AuthService {
 
-    static HOST = 'https://odyssey.wildcodeschool.com/oauth/';
+    static HOST = 'https://odyssey.wildcodeschool.com/';
+    static OAUTH_HOST = AuthService.HOST + 'oauth/';
 
     constructor(private readonly http: HttpService) {
 
     }
 
     handleOAuthCallback(code: string) {
+        const oauth$ = this.getOauth(code);
 
+        // oauth$.pipe(flatMap());
+        return;
+    }
+
+    /**
+     * *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * *                                      Récupération des crédential Oauth
+     * *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     */
+
+    private getOauth(code: string) {
+        const config = this.createOauthConf(code);
+
+        return this.http.post(AuthService.OAUTH_HOST + 'token', config.data, config)
+            .pipe(map((response) => {
+                return new OauthResponse(response.data);
+            }));
+
+    }
+
+    private createOauthConf(code: string) {
         const credentials = {
             code,
             redirect_uri: 'http://localhost:3000/auth/oauth',
@@ -28,9 +53,31 @@ export class AuthService {
             data: querystring.stringify(credentials),
         };
 
-        return this.http.post(AuthService.HOST + 'token', querystring.stringify(credentials), config)
-            .pipe(map((response) => {
-                return response.data;
-            }));
+        return config;
     }
+
+    /**
+     * *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * *                      Récupération des informations utilisateur
+     * *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     */
+
+    private getUserData(oauthResponse: OauthResponse) {
+        const axiosConfig = this.createAxiosConfig(oauthResponse.accessToken);
+        this.http.get(AuthService.HOST);
+    }
+
+    private createAxiosConfig(token: string): AxiosRequestConfig {
+        const axiosConfig: AxiosRequestConfig = {
+            headers: this.createAuthHeader(token),
+        };
+        return axiosConfig;
+    }
+    private createAuthHeader(token: string): any {
+        const authHeader = {
+            Authorization: `Bearer ${token}`,
+        };
+        return authHeader;
+    }
+
 }
