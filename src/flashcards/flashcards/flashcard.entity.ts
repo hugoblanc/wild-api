@@ -13,7 +13,7 @@ export class Flashcard extends AbstractEntity {
     secondDescription: string;
 
     @ApiModelProperty()
-    @Column({ length: 200 })
+    @Column({ length: 200, nullable: true , default: () => null })
     imageUrl: string;
 
     @ApiModelProperty({ type: Flashfolder })
