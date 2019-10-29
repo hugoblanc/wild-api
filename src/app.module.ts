@@ -8,6 +8,7 @@ import { TicketsModule } from './tickets/tickets.module';
 import { TopicsModule } from './topics/topics.module';
 import { EventsModule } from './events/events.module';
 import { GroupsModule } from './groups/groups.module';
+import { CoreModule } from './core/core.module';
 
 @Module({
     imports: [
@@ -30,6 +31,7 @@ import { GroupsModule } from './groups/groups.module';
         TopicsModule,
         EventsModule,
         GroupsModule,
+        CoreModule,
     ],
     controllers: [AppController],
     providers: [AppService],
