@@ -1,12 +1,15 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param, Redirect } from '@nestjs/common';
 import { AppService } from './app.service';
+import querystring = require('querystring');
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @Redirect('https://wild-api.witpoc.com/api/', 302)
+  getDocs() {
+    return { url: 'https://wild-api.witpoc.com/api/' };
   }
+
 }
