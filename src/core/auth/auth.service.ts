@@ -18,7 +18,7 @@ export class AuthService {
         const oauth$ = this.getOauth(code);
 
         // oauth$.pipe(flatMap());
-        return;
+        return oauth$;
     }
 
     /**
