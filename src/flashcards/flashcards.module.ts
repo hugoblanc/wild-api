@@ -8,7 +8,7 @@ import { FoldersController } from './folders/folders.controller';
 import { FoldersService } from './folders/folders.service';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Flashcard, Flashfolder])],
+    imports: [TypeOrmModule.forFeature([Flashfolder, Flashcard])],
     providers: [FlashcardsService, FoldersService],
     controllers: [FlashcardsController, FoldersController],
 })

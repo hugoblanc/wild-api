@@ -2,7 +2,6 @@ import { ApiModelProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 import { Column, Entity, ManyToOne } from 'typeorm';
 import { AbstractEntity } from '../../core/abstract/abstract.entity';
-import { User } from '../../users/user.entity';
 import { Flashfolder } from '../folders/flashfolder.entity';
 
 @Entity()

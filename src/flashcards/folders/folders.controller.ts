@@ -1,5 +1,5 @@
 import { Controller } from '@nestjs/common';
-import { Crud } from '@nestjsx/crud';
+import { Crud, CrudController } from '@nestjsx/crud';
 import { Flashfolder } from './flashfolder.entity';
 import { ApiUseTags } from '@nestjs/swagger';
 import { FoldersService } from './folders.service';
@@ -10,17 +10,11 @@ import { FoldersService } from './folders.service';
     model: {
         type: Flashfolder,
     },
-    params: {
-        id: {
-            field: 'id',
-            type: 'number',
-            primary: true,
-        },
-    },
     query: {
         join: {
             flashcards: {
                 eager: true,
+                persist: ['id', 'title'],
             },
             group: {
                 eager: true,
@@ -31,7 +25,7 @@ import { FoldersService } from './folders.service';
         },
     },
 })
-export class FoldersController {
+export class FoldersController implements CrudController<Flashfolder> {
 
-    constructor(public service: FoldersService)  { }
+    constructor(public service: FoldersService) { }
 }

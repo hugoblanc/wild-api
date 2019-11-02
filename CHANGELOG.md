@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.4](https://github.com/hugoblanc/wild-api/compare/v0.0.3...v0.0.4) (2019-11-02)
+
+
+### Features
+
+* abstract validation ([2a56ad4](https://github.com/hugoblanc/wild-api/commit/2a56ad40e40da5dd21472a96aff47babdfc3cc34))
+* add folder feature, clean structure ([7accafa](https://github.com/hugoblanc/wild-api/commit/7accafa68d9afb4f613d03ed297d513a2166baa8))
+* add status to ticket ([050b7ff](https://github.com/hugoblanc/wild-api/commit/050b7fff80329af7231e25c680a50baf17374dac))
+* enable user  validatoin ([25d96e2](https://github.com/hugoblanc/wild-api/commit/25d96e2d756fdf3e78dd4551c676fd5d5a616878))
+* enforce post validity ([112360a](https://github.com/hugoblanc/wild-api/commit/112360a0570a73d929ef22ce73f9d65deb473aed))
+* event validation ([e6e8f73](https://github.com/hugoblanc/wild-api/commit/e6e8f73ef986b1cefa56d58c3f8bb37d6413df28))
+* flashcard the crud way ([62db4b6](https://github.com/hugoblanc/wild-api/commit/62db4b6998e0cdcf84822330cd451dfb95c597ac))
+* redirect on swagger route ([2ceca73](https://github.com/hugoblanc/wild-api/commit/2ceca73c5b4b10cd0a47cb6cd4d1a40878f5f9a1))
+
+
+### Bug Fixes
+
+* event documentation ([0246547](https://github.com/hugoblanc/wild-api/commit/0246547a618f0b7b7e10e92beb672ef2776d6ff9))
+* flashcard length ([3267f3b](https://github.com/hugoblanc/wild-api/commit/3267f3bb57814bb4cc83e27fb165fc4ae9d46e3a))
+* https schemes ([7b79d8b](https://github.com/hugoblanc/wild-api/commit/7b79d8b54ca664c1696399e36963dacad1d04537))
+
 ### [0.0.3](https://github.com/hugoblanc/wild-api/compare/v0.0.2...v0.0.3) (2019-10-20)
 
 
