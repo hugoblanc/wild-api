@@ -1,7 +1,7 @@
 import { EventsService } from './events.service';
 import { Controller } from '@nestjs/common';
 import { ApiUseTags } from '@nestjs/swagger';
-import { Crud } from '@nestjsx/crud';
+import { Crud, CrudController } from '@nestjsx/crud';
 import { Event } from './event.entity';
 
 @ApiUseTags('events')
@@ -28,9 +28,8 @@ import { Event } from './event.entity';
         },
     },
 })
-export class EventsController {
+export class EventsController implements CrudController<Event> {
 
-    constructor(public service: EventsService) {
-    }
+    constructor(public service: EventsService) { }
 
 }

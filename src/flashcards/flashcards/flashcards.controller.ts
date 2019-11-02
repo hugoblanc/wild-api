@@ -1,6 +1,6 @@
 import { Controller } from '@nestjs/common';
 import { ApiUseTags } from '@nestjs/swagger';
-import { Crud } from '@nestjsx/crud';
+import { Crud, CrudController } from '@nestjsx/crud';
 import { Flashcard } from './flashcard.entity';
 import { FlashcardsService } from './flashcards.service';
 
@@ -10,13 +10,6 @@ import { FlashcardsService } from './flashcards.service';
     model: {
         type: Flashcard,
     },
-    params: {
-        id: {
-            field: 'id',
-            type: 'number',
-            primary: true,
-        },
-    },
     query: {
         join: {
             user: {
@@ -25,8 +18,8 @@ import { FlashcardsService } from './flashcards.service';
         },
     },
 })
-export class FlashcardsController {
+export class FlashcardsController implements CrudController<Flashcard> {
 
-    constructor(public service: FlashcardsService) {  }
+    constructor(public service: FlashcardsService) { }
 
 }
