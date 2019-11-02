@@ -1,6 +1,6 @@
 import { Controller } from '@nestjs/common';
 import { ApiUseTags } from '@nestjs/swagger';
-import { Crud } from '@nestjsx/crud';
+import { Crud, CrudController } from '@nestjsx/crud';
 import { Topic } from './topic.entity';
 import { TopicsService } from './topics.service';
 
@@ -28,26 +28,8 @@ import { TopicsService } from './topics.service';
         },
     },
 })
-export class TopicsController {
+export class TopicsController implements CrudController<Topic> {
 
     constructor(public service: TopicsService) {  }
-
-    // @Post()
-    // @ApiResponse({ status: HttpStatus.CREATED, type: Topic })
-    // async create(@Body() topic: Topic) {
-    //     return super.create(topic);
-    // }
-
-    // @Get('/:id')
-    // @ApiResponse({ status: HttpStatus.OK, type: Topic })
-    // findById(@Param('id') id: number) {
-    //     return super.findById(id);
-    // }
-
-    // @Get()
-    // @ApiResponse({ status: HttpStatus.OK, type: [Topic] })
-    // async findAll() {
-    //     return super.findAll();
-    // }
 
 }

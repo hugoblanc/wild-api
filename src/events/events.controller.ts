@@ -1,7 +1,7 @@
 import { EventsService } from './events.service';
 import { Controller } from '@nestjs/common';
 import { ApiUseTags } from '@nestjs/swagger';
-import { Crud } from '@nestjsx/crud';
+import { Crud, CrudController } from '@nestjsx/crud';
 import { Event } from './event.entity';
 
 @ApiUseTags('events')
@@ -28,27 +28,8 @@ import { Event } from './event.entity';
         },
     },
 })
-export class EventsController {
+export class EventsController implements CrudController<Event> {
 
-    constructor(public service: EventsService) {
-    }
-
-    // @Post()
-    // @ApiResponse({ status: HttpStatus.CREATED, type: Event })
-    // async create(@Body() event: EventDto): Promise<Event> {
-    //     return super.create(event);
-    // }
-
-    // @Get('/:id')
-    // @ApiResponse({ status: HttpStatus.OK, type: Event })
-    // findById(@Param('id') id: number): Promise<Event> {
-    //     return super.findById(id);
-    // }
-
-    // @Get()
-    // @ApiResponse({ status: HttpStatus.OK, type: [Event] })
-    // async findAll(): Promise<Event[]> {
-    //     return super.findAll();
-    // }
+    constructor(public service: EventsService) { }
 
 }
