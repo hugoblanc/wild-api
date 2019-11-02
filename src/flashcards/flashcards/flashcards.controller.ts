@@ -9,14 +9,7 @@ import { FlashcardsService } from './flashcards.service';
 @Crud({
     model: {
         type: Flashcard,
-    },
-    query: {
-        join: {
-            user: {
-                eager: true,
-            },
-        },
-    },
+    }
 })
 export class FlashcardsController implements CrudController<Flashcard> {
 
