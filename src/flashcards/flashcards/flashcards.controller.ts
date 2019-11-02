@@ -9,7 +9,7 @@ import { FlashcardsService } from './flashcards.service';
 @Crud({
     model: {
         type: Flashcard,
-    }
+    },
 })
 export class FlashcardsController implements CrudController<Flashcard> {
 

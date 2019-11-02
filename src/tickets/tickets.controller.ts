@@ -34,4 +34,3 @@ export class TicketsController implements CrudController<Ticket> {
     }
 
 }
-
