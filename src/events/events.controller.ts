@@ -33,22 +33,4 @@ export class EventsController {
     constructor(public service: EventsService) {
     }
 
-    // @Post()
-    // @ApiResponse({ status: HttpStatus.CREATED, type: Event })
-    // async create(@Body() event: EventDto): Promise<Event> {
-    //     return super.create(event);
-    // }
-
-    // @Get('/:id')
-    // @ApiResponse({ status: HttpStatus.OK, type: Event })
-    // findById(@Param('id') id: number): Promise<Event> {
-    //     return super.findById(id);
-    // }
-
-    // @Get()
-    // @ApiResponse({ status: HttpStatus.OK, type: [Event] })
-    // async findAll(): Promise<Event[]> {
-    //     return super.findAll();
-    // }
-
 }
