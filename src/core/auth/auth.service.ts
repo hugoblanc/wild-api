@@ -20,6 +20,7 @@ export class AuthService {
     }
 
     handleOAuthCallback(code: string) {
+
         const oauth$ = this.getOauth(code);
 
         const user$ = oauth$.pipe(flatMap((odyResponse: OauthResponse) => {
@@ -27,11 +28,11 @@ export class AuthService {
             return this.odysseyService.getCurrentUser(axiosConfig);
         }));
 
-        user$.pipe(map((odysseyMeDto: OdysseyMeDTO) => {
+        const signedToken$ = user$.pipe(map((odysseyMeDto: OdysseyMeDTO) => {
             return this.login({ email: odysseyMeDto.email, id: odysseyMeDto.id });
         }));
+        return signedToken$;
 
-        return user$;
     }
 
     /**
