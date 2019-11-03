@@ -1,8 +1,10 @@
 import { OauthResponse } from './oauth-response';
 import { Injectable, HttpService } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { map, flatMap } from 'rxjs/operators';
 import querystring = require('querystring');
 import { AxiosRequestConfig } from 'axios';
+import { OdysseyService } from '../../odyssey/odyssey.service';
 
 @Injectable()
 export class AuthService {
@@ -10,15 +12,26 @@ export class AuthService {
     static HOST = 'https://odyssey.wildcodeschool.com/';
     static OAUTH_HOST = AuthService.HOST + 'oauth/';
 
-    constructor(private readonly http: HttpService) {
+    constructor(
+        private readonly http: HttpService,
+        private readonly jwtService: JwtService,
+        private readonly odysseyService: OdysseyService) {
 
     }
 
     handleOAuthCallback(code: string) {
         const oauth$ = this.getOauth(code);
 
-        // oauth$.pipe(flatMap());
-        return oauth$;
+        const user$ = oauth$.pipe(flatMap((odyResponse: OauthResponse) => {
+            const axiosConfig = this.createBearerConfig(odyResponse.accessToken);
+            return this.odysseyService.getCurrentUser(axiosConfig);
+        }));
+
+        user$.pipe(map((odysseyMeDto: OdysseyMeDTO) => {
+            return this.login({ email: odysseyMeDto.email, id: odysseyMeDto.id });
+        }));
+
+        return user$;
     }
 
     /**
@@ -34,7 +47,13 @@ export class AuthService {
             .pipe(map((response) => {
                 return new OauthResponse(response.data);
             }));
+    }
 
+    login(user: any) {
+        const payload = { email: user.email, sub: user.id };
+        return {
+            access_token: this.jwtService.sign(payload),
+        };
     }
 
     private createOauthConf(code: string) {
@@ -62,12 +81,7 @@ export class AuthService {
      * *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      */
 
-    private getUserData(oauthResponse: OauthResponse) {
-        const axiosConfig = this.createAxiosConfig(oauthResponse.accessToken);
-        this.http.get(AuthService.HOST);
-    }
-
-    private createAxiosConfig(token: string): AxiosRequestConfig {
+    private createBearerConfig(token: string): AxiosRequestConfig {
         const axiosConfig: AxiosRequestConfig = {
             headers: this.createAuthHeader(token),
         };
