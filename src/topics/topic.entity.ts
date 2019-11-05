@@ -1,6 +1,6 @@
 import { ApiModelProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne, ManyToMany, JoinTable } from 'typeorm';
 import { AbstractEntity } from '../core/abstract/abstract.entity';
 import { User } from '../users/user.entity';
 import { Group } from './../groups/group.entity';
@@ -22,5 +22,13 @@ export class Topic extends AbstractEntity {
     @ManyToOne(type => Group, group => group.topics, { cascade: ['insert', 'update'] })
     @IsNotEmpty()
     group: Group;
+
+    @ManyToMany(type => User, user => user.favoriteTopics)
+    @JoinTable()
+    favoriters: User[];
+
+    @ManyToMany(type => User, user => user.favoriteTopics)
+    @JoinTable()
+    likers: User[];
 
 }
