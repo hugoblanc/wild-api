@@ -5,6 +5,9 @@ import { map, flatMap } from 'rxjs/operators';
 import querystring = require('querystring');
 import { AxiosRequestConfig } from 'axios';
 import { OdysseyService } from '../../odyssey/odyssey.service';
+import { UsersService } from '../../users/users.service';
+import { from } from 'rxjs';
+import { User } from '../../users/user.entity';
 
 @Injectable()
 export class AuthService {
@@ -15,22 +18,35 @@ export class AuthService {
     constructor(
         private readonly http: HttpService,
         private readonly jwtService: JwtService,
-        private readonly odysseyService: OdysseyService) {
+        private readonly odysseyService: OdysseyService,
+        private readonly userService: UsersService) {
 
     }
 
     handleOAuthCallback(code: string) {
 
+        // Get token
         const oauth$ = this.getOauth(code);
 
-        const user$ = oauth$.pipe(flatMap((odyResponse: OauthResponse) => {
+        // Get du user via token
+        const odysseyDTO$ = oauth$.pipe(flatMap((odyResponse: OauthResponse) => {
             const axiosConfig = this.createBearerConfig(odyResponse.accessToken);
             return this.odysseyService.getCurrentUser(axiosConfig);
         }));
 
-        const signedToken$ = user$.pipe(map((odysseyMeDto: OdysseyMeDTO) => {
-            return this.login({ email: odysseyMeDto.email, id: odysseyMeDto.id });
+        // Save ou update du user
+        const user$ = odysseyDTO$.pipe(
+            flatMap((odyDTO: OdysseyMeDTO) =>
+                from(this.userService.save((new User()).assignOdysseyDTo(odyDTO))),
+            ),
+        );
+
+        // Génération du jwt
+        const signedToken$ = user$.pipe(map((user: User) => {
+            console.log(user);
+            return this.login(user);
         }));
+
         return signedToken$;
 
     }
@@ -51,9 +67,8 @@ export class AuthService {
     }
 
     login(user: any) {
-        const payload = { email: user.email, sub: user.id };
         return {
-            access_token: this.jwtService.sign(payload),
+            access_token: this.jwtService.sign({payload: user}),
         };
     }
 
