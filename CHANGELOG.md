@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/hugoblanc/wild-api/compare/v0.0.4...v0.0.5) (2019-11-05)
+
+
+### Features
+
+* attemp auth ([d0e8a96](https://github.com/hugoblanc/wild-api/commit/d0e8a96743677daab2cd95d4e133f8eb48b5bc0d))
+* attemp auth ([8df0733](https://github.com/hugoblanc/wild-api/commit/8df0733abcd9c3b83737fa25f97010031cfa992b))
+* deal with user ([29d155f](https://github.com/hugoblanc/wild-api/commit/29d155f6dd08b81caf8975001826195ff90f8c57))
+* init Oauth  generate token ([c0b5638](https://github.com/hugoblanc/wild-api/commit/c0b5638f7baf28c0902600a36580bff84227d227))
+* init Oauth  generate token ([60f8674](https://github.com/hugoblanc/wild-api/commit/60f86743b9d24c5bd2637b465c884ad9d0ce45f4))
+* jwt strategie initialized ([dc9592f](https://github.com/hugoblanc/wild-api/commit/dc9592fffca538625591580ae6b9b77e5c1d093d))
+* odyssey specific service ([7e13494](https://github.com/hugoblanc/wild-api/commit/7e13494845009628acd6fd851c1178d798890e14))
+* redirect on swagger route ([2b10eef](https://github.com/hugoblanc/wild-api/commit/2b10eefdf6665ee6c45f6973cb9fb117fefea54a))
+* redirect on swagger route ([362c638](https://github.com/hugoblanc/wild-api/commit/362c638be9ea59226ed45e1885a921baf61cd7a2))
+* route Oauth ([0c58a12](https://github.com/hugoblanc/wild-api/commit/0c58a122fb16eee732a6400383df9e47628dcd8d))
+* route Oauth ([e3a75c3](https://github.com/hugoblanc/wild-api/commit/e3a75c3a77d1bd9fba9bb15ad0c003efae19a03a))
+* secur ticket ([1247519](https://github.com/hugoblanc/wild-api/commit/124751978102cc903e4872702fd48c51ebd39e66))
+* secure event ([deb30d7](https://github.com/hugoblanc/wild-api/commit/deb30d7457fe836f87442296d0c66cab36feafa3))
+* secure route flash ([128c898](https://github.com/hugoblanc/wild-api/commit/128c898071ce0dda8e3449c8f2b55d005fbccc4c))
+* secure topic ([b948d66](https://github.com/hugoblanc/wild-api/commit/b948d6644a0924fdb8cee089e108f9d103033bdb))
+* sign jwt ([b0db51a](https://github.com/hugoblanc/wild-api/commit/b0db51abd57bb99f4ce553ad8e625ca456068c6b))
+* user change format ([75e78b5](https://github.com/hugoblanc/wild-api/commit/75e78b58500654404d15963cba26a5de928614aa))
+
+
+### Bug Fixes
+
+* send wrong observable ([385579b](https://github.com/hugoblanc/wild-api/commit/385579b315d47f6a7a3dd8fa913a91810799cfe4))
+
 ### [0.0.4](https://github.com/hugoblanc/wild-api/compare/v0.0.3...v0.0.4) (2019-11-02)
 
 
