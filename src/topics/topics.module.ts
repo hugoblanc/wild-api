@@ -1,3 +1,4 @@
+import { TopicsSecureController } from './topics-secure.controller';
 import { Module } from '@nestjs/common';
 import { TopicsService } from './topics.service';
 import { TopicsController } from './topics.controller';
@@ -7,6 +8,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
     imports: [TypeOrmModule.forFeature([Topic])],
     providers: [TopicsService],
-    controllers: [TopicsController],
+    controllers: [TopicsController, TopicsSecureController],
 })
 export class TopicsModule { }
