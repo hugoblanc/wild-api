@@ -1,30 +1,43 @@
-import { Controller, Post, Body, Get, Param } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
+import { ApiUseTags } from '@nestjs/swagger';
+import { Crud, CrudController } from '@nestjsx/crud';
 import { UsersService } from './users.service';
 import { User } from './user.entity';
-import { AbstractController } from '../core/abstract/abstract.controller';
-import { ApiUseTags } from '@nestjs/swagger';
-import { UserDto } from './user-dto';
 
 @ApiUseTags('users')
 @Controller('users')
-export class UsersController extends AbstractController<User, UserDto> {
+@Crud({
+    model: {
+        type: User,
+    },
+    params: {
+        id: {
+            field: 'id',
+            type: 'number',
+            primary: true,
+        },
+    },
+    routes: { only: ['getManyBase', 'getOneBase'] },
+    query: {
+        join: {
+            groups: {
+            },
+            tickets: {
+            },
+            events: {
+            },
+            flashfolders: {
+            },
+            topics: {
+            },
+            favoriteTopics: {
+            },
+            likedTopics: {
+            },
+        },
+    },
+})
+export class UsersController implements CrudController<User> {
 
-    constructor(private readonly userService: UsersService) {
-        super(userService);
-    }
-
-    @Post()
-    async create(@Body() user: UserDto) {
-        return super.create(user);
-    }
-
-    @Get('/:id')
-    findById(@Param('id') id: number) {
-        return super.findById(id);
-    }
-
-    @Get()
-    async findAll() {
-        return super.findAll();
-    }
+    constructor(public service: UsersService) { }
 }

@@ -50,6 +50,12 @@ export class User {
     @OneToMany(type => Topic, topic => topic.user)
     topics: Topic[];
 
+    @ManyToMany(type => Topic, topic => topic.favoriters)
+    favoriteTopics: Topic[];
+
+    @ManyToMany(type => Topic, topic => topic.likers)
+    likedTopics: Topic[];
+
     assignOdysseyDTo(odysseyDTO: OdysseyMeDTO) {
         this.id = odysseyDTO.id;
         this.firstname = odysseyDTO.firstname;

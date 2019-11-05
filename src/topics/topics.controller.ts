@@ -25,11 +25,15 @@ import { TopicsService } from './topics.service';
             group: {
                 eager: true,
             },
+            favoriters: {
+            },
+            likers: {
+            },
         },
     },
 })
 export class TopicsController implements CrudController<Topic> {
 
-    constructor(public service: TopicsService) {  }
+    constructor(public service: TopicsService) { }
 
 }
