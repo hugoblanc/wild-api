@@ -8,6 +8,8 @@ import { TicketsModule } from './tickets/tickets.module';
 import { TopicsModule } from './topics/topics.module';
 import { EventsModule } from './events/events.module';
 import { GroupsModule } from './groups/groups.module';
+import { CoreModule } from './core/core.module';
+import { OdysseyModule } from './odyssey/odyssey.module';
 
 @Module({
     imports: [
@@ -30,6 +32,8 @@ import { GroupsModule } from './groups/groups.module';
         TopicsModule,
         EventsModule,
         GroupsModule,
+        CoreModule,
+        OdysseyModule,
     ],
     controllers: [AppController],
     providers: [AppService],
