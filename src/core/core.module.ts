@@ -6,12 +6,14 @@ import { AuthService } from './auth/auth.service';
 import { jwtConstants } from './auth/constants';
 import { JwtStrategy } from './auth/strategies/jwt-strategy';
 import { OdysseyModule } from '../odyssey/odyssey.module';
+import { UsersModule } from '../users/users.module';
 
 @Module({
   providers: [AuthService, JwtStrategy],
   controllers: [AuthController],
   imports: [HttpModule,
     OdysseyModule,
+    UsersModule,
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,
