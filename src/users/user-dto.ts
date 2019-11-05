@@ -1,17 +1,17 @@
 import { GroupDto } from '../groups/group-dto';
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 export class UserDto {
 
-    @ApiModelProperty({ required: false })
+    @ApiProperty({ required: false })
     id?: number;
 
-    @ApiModelProperty()
+    @ApiProperty()
     firstname: string;
 
-    @ApiModelProperty()
+    @ApiProperty()
     lastname: string;
 
-    @ApiModelProperty({ type: [GroupDto], required: false })
+    @ApiProperty({ type: [GroupDto], required: false })
     groups: GroupDto[];
 
 }

@@ -1,11 +1,11 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class FlashcardDto {
 
-    @ApiModelProperty({ required: false })
+    @ApiProperty({ required: false })
     secondDescription?: string;
 
-    @ApiModelProperty({ required: false })
+    @ApiProperty({ required: false })
     imageUrl?: string;
 
 }

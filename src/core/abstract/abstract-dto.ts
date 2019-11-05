@@ -1,20 +1,20 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class AbstractDto {
 
-    @ApiModelProperty({ required: false })
+    @ApiProperty({ required: false })
     id?: number;
 
-    @ApiModelProperty()
+    @ApiProperty()
     title: string;
 
-    @ApiModelProperty()
+    @ApiProperty()
     description: string;
 
-    @ApiModelProperty({ type: 'string', format: 'date-time', example: '2018-11-21T06:20:32.232Z' })
+    @ApiProperty({ type: 'string', format: 'date-time', example: '2018-11-21T06:20:32.232Z' })
     createdAt: Date;
 
-    @ApiModelProperty({ type: 'string', format: 'date-time', example: '2018-11-21T06:20:32.232Z' })
+    @ApiProperty({ type: 'string', format: 'date-time', example: '2018-11-21T06:20:32.232Z' })
     updatedAt: Date;
 
 }

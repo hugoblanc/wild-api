@@ -1,11 +1,11 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class GroupDto {
 
-    @ApiModelProperty({ required: false })
+    @ApiProperty({ required: false })
     id?: number;
 
-    @ApiModelProperty()
+    @ApiProperty()
     name: string;
 
 }

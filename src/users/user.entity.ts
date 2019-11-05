@@ -1,4 +1,4 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryColumn } from 'typeorm';
 import { Event } from '../events/event.entity';
@@ -10,49 +10,51 @@ import { Flashfolder } from './../flashcards/folders/flashfolder.entity';
 @Entity()
 export class User {
 
-    @ApiModelProperty({ required: false })
+    @ApiProperty({ required: false })
     @PrimaryColumn()
     id: number;
 
-    @ApiModelProperty()
+    @ApiProperty()
     @Column({ length: 40 })
     @IsNotEmpty()
     email: string;
 
-    @ApiModelProperty()
+    @ApiProperty()
     @Column({ length: 30 })
     @IsNotEmpty()
     firstname: string;
 
-    @ApiModelProperty()
+    @ApiProperty()
     @Column({ length: 30 })
     @IsNotEmpty()
     lastname: string;
 
-    @ApiModelProperty({ type: [Group], required: false })
+    @ApiProperty({ type: [Group], required: false })
     @ManyToMany(type => Group)
     @JoinTable()
     groups: Group[];
 
-    @ApiModelProperty({ type: [Ticket], required: false })
+    @ApiProperty({ type: [Ticket], required: false })
     @OneToMany(type => Ticket, ticket => ticket.user)
     tickets: Ticket[];
 
-    @ApiModelProperty({ type: [Event], required: false })
+    @ApiProperty({ type: [Event], required: false })
     @OneToMany(type => Event, event => event.user)
     events: Event[];
 
-    @ApiModelProperty({ type: [Flashfolder], required: false })
+    @ApiProperty({ type: [Flashfolder], required: false })
     @OneToMany(type => Flashfolder, flashfolder => flashfolder.user)
     flashfolders: Flashfolder[];
 
-    @ApiModelProperty({ type: [Topic], required: false })
+    @ApiProperty({ type: [Topic], required: false })
     @OneToMany(type => Topic, topic => topic.user)
     topics: Topic[];
 
+    @ApiProperty({ type: [Topic], required: false })
     @ManyToMany(type => Topic, topic => topic.favoriters)
     favoriteTopics: Topic[];
 
+    @ApiProperty({ type: [Topic], required: false })
     @ManyToMany(type => Topic, topic => topic.likers)
     likedTopics: Topic[];
 
