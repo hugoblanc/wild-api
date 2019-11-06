@@ -13,6 +13,10 @@ export class Topic extends AbstractEntity {
     @IsNotEmpty()
     resourceUrl: string;
 
+    @ApiModelProperty()
+    @Column({ length: 150 })
+    pictureUrl: string;
+
     @ApiModelProperty({ type: User })
     @ManyToOne(type => User, user => user.topics)
     @IsNotEmpty()
