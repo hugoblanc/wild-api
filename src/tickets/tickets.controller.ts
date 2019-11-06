@@ -23,7 +23,8 @@ import { Crud, CrudController } from '@nestjsx/crud';
                 eager: true,
             },
             group: {
-                eager: true,
+            },
+            school: {
             },
         },
     },
