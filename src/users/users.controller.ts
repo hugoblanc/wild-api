@@ -35,6 +35,8 @@ import { AuthGuard } from '@nestjs/passport';
             },
             likedTopics: {
             },
+            school: {
+            },
         },
     },
 })
