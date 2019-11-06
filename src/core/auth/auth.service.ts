@@ -1,4 +1,4 @@
-import { HttpService, Injectable } from '@nestjs/common';
+import { HttpService, Injectable, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { AxiosRequestConfig } from 'axios';
 import { from } from 'rxjs';
@@ -15,8 +15,10 @@ export class AuthService {
     static HOST = 'https://odyssey.wildcodeschool.com/';
     static OAUTH_HOST = AuthService.HOST + 'oauth/';
     static ROUTE_AUTH = AuthService.OAUTH_HOST + 'authorize?client_id=0dd2e3ce72b4e0345c8f41c23b4e1da2a9e81f95d6a50b14e2c0053a95b47cc1&response_type=code';
-    static GLOBAL_AUTH = AuthService.ROUTE_AUTH + '&redirect_uri=https%3A%2F%2Fwild-api.witpoc.com%2Fauth%2Foauth';
-    // static GLOBAL_AUTH = AuthService.ROUTE_AUTH + '&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth%2Foauth';
+    // static GLOBAL_AUTH = AuthService.ROUTE_AUTH + '&redirect_uri=https%3A%2F%2Fwild-api.witpoc.com%2Fauth%2Foauth';
+    static GLOBAL_AUTH = AuthService.ROUTE_AUTH + '&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth%2Foauth';
+
+    readonly logger = new Logger(AuthService.name);
 
     constructor(
         private readonly http: HttpService,
@@ -34,9 +36,12 @@ export class AuthService {
         // Get du user via token
         const odysseyDTO$ = oauth$.pipe(flatMap((odyResponse: OauthResponse) => {
             const axiosConfig = this.createBearerConfig(odyResponse.accessToken);
+            console.log(odyResponse);
+            this.logger.log('Get odyssey answer: OK');
             return this.odysseyService.getCurrentUser(axiosConfig);
         }),
             catchError((error) => {
+                console.error(error);
                 throw error;
             },
             ));
@@ -59,17 +64,21 @@ export class AuthService {
     }
 
     /**
-     * *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     * *                                      Récupération des crédential Oauth
-     * *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     */
+    * *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    * *                                      Récupération des crédential Oauth
+    * *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    */
 
     private getOauth(code: string) {
         const config = this.createOauthConf(code);
 
         return this.http.post(AuthService.OAUTH_HOST + 'token', config.data, config)
             .pipe(map((response) => {
-                return new OauthResponse(response.data);
+                console.log(response.data);
+                this.logger.log('Get Oauth data: ok');
+                const result = new OauthResponse(response.data);
+                this.logger.log('Parsing Oauth data: ok');
+                return result;
             }));
     }
 
@@ -82,8 +91,8 @@ export class AuthService {
     private createOauthConf(code: string) {
         const credentials = {
             code,
-            redirect_uri: 'https://wild-api.witpoc.com/auth/oauth',
-            // redirect_uri: 'http://localhost:3000/auth/oauth',
+            // redirect_uri: 'https://wild-api.witpoc.com/auth/oauth',
+            redirect_uri: 'http://localhost:3000/auth/oauth',
             grant_type: 'authorization_code',
             client_secret: '44f6416225beb466428c70c92e0a7a50c42c88573f2f99784b24095ba446c2dd',
             client_id: '0dd2e3ce72b4e0345c8f41c23b4e1da2a9e81f95d6a50b14e2c0053a95b47cc1',
@@ -100,10 +109,10 @@ export class AuthService {
     }
 
     /**
-     * *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     * *                      Récupération des informations utilisateur
-     * *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     */
+    * *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    * *                      Récupération des informations utilisateur
+    * *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    */
 
     private createBearerConfig(token: string): AxiosRequestConfig {
         const axiosConfig: AxiosRequestConfig = {

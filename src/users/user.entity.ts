@@ -29,6 +29,14 @@ export class User {
     @IsNotEmpty()
     lastname: string;
 
+    @ApiModelProperty()
+    @Column({ length: 30 })
+    github: string;
+
+    @ApiModelProperty()
+    @Column({ length: 30})
+    role: string;
+
     @ApiModelProperty({ type: type => Group, isArray: true, required: false })
     @ManyToMany(type => Group)
     @JoinTable()
@@ -59,8 +67,10 @@ export class User {
     assignOdysseyDTo(odysseyDTO: OdysseyMeDTO) {
         this.id = odysseyDTO.id;
         this.firstname = odysseyDTO.firstname;
-        this.lastname = odysseyDTO.firstname;
+        this.lastname = odysseyDTO.lastname;
         this.email = odysseyDTO.email;
+        this.github = odysseyDTO.github;
+        this.role = odysseyDTO.roles.length > 1 ? 'administrator' : 'student';
         return this;
     }
 }
