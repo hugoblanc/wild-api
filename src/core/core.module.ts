@@ -12,8 +12,8 @@ import { UsersModule } from '../users/users.module';
   providers: [AuthService, JwtStrategy],
   controllers: [AuthController],
   imports: [HttpModule,
-    OdysseyModule,
     UsersModule,
+    OdysseyModule,
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,

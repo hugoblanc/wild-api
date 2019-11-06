@@ -4,7 +4,7 @@ import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
 
-@Injectable({ scope: Scope.REQUEST })
+@Injectable()
 export class UsersService extends TypeOrmCrudService<User> {
 
     readonly logger = new Logger(UsersService.name);
