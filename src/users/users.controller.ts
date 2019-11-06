@@ -38,12 +38,12 @@ import { AuthGuard } from '@nestjs/passport';
         },
     },
 })
-@UseGuards(AuthGuard('jwt'))
 export class UsersController implements CrudController<User> {
 
     constructor(public service: UsersService) { }
 
     @Get('me')
+    @UseGuards(AuthGuard('jwt'))
     findMe(@Request() req) {
         return req.user;
     }
