@@ -1,11 +1,12 @@
 import { ApiModelProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
-import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryColumn } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryColumn, ManyToOne } from 'typeorm';
 import { Event } from '../events/event.entity';
 import { Group } from '../groups/group.entity';
 import { Ticket } from '../tickets/ticket.entity';
 import { Topic } from '../topics/topic.entity';
 import { Flashfolder } from './../flashcards/folders/flashfolder.entity';
+import { School } from '../school/school.entity';
 
 @Entity()
 export class User {
@@ -42,6 +43,10 @@ export class User {
     @JoinTable()
     groups: Group[];
 
+    @ManyToOne(type => School, school => school.users)
+    @ApiModelProperty({ type: School })
+    school: School;
+
     @ApiModelProperty({ type: [Ticket], required: false })
     @OneToMany(type => Ticket, ticket => ticket.user)
     tickets: Ticket[];
@@ -71,6 +76,7 @@ export class User {
         this.email = odysseyDTO.email;
         this.github = odysseyDTO.github;
         this.role = odysseyDTO.roles.length > 1 ? 'administrator' : 'student';
+        this.school = {id: odysseyDTO.current_crew.location.id} as School;
         return this;
     }
 }

@@ -23,7 +23,7 @@ export class Topic extends AbstractEntity {
     user: User;
 
     @ApiModelProperty({ type: Group })
-    @ManyToOne(type => Group, group => group.topics, { cascade: ['insert', 'update'] })
+    @ManyToOne(type => Group, group => group.topics)
     @IsNotEmpty()
     group: Group;
 

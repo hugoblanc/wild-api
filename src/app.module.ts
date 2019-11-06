@@ -10,6 +10,7 @@ import { EventsModule } from './events/events.module';
 import { GroupsModule } from './groups/groups.module';
 import { CoreModule } from './core/core.module';
 import { OdysseyModule } from './odyssey/odyssey.module';
+import { SchoolModule } from './school/school/school.module';
 
 @Module({
     imports: [
@@ -34,6 +35,7 @@ import { OdysseyModule } from './odyssey/odyssey.module';
         GroupsModule,
         CoreModule,
         OdysseyModule,
+        SchoolModule,
     ],
     controllers: [AppController],
     providers: [AppService],
