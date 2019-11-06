@@ -29,7 +29,7 @@ export class User {
     @IsNotEmpty()
     lastname: string;
 
-    @ApiModelProperty({ type: [Group], required: false })
+    @ApiModelProperty({ type: type => Group, isArray: true, required: false })
     @ManyToMany(type => Group)
     @JoinTable()
     groups: Group[];
