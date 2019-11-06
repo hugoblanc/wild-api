@@ -14,6 +14,9 @@ export class Flashfolder extends AbstractEntity {
     @IsNotEmpty()
     user: User;
 
+    @ApiModelProperty()
+    tag: string;
+
     @ApiModelProperty({ type: Group })
     @ManyToOne(type => Group, group => group.flashfolders, { cascade: ['insert', 'update'] })
     @IsNotEmpty()
