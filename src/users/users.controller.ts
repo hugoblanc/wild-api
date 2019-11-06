@@ -1,8 +1,9 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Request, UseGuards } from '@nestjs/common';
 import { ApiUseTags } from '@nestjs/swagger';
 import { Crud, CrudController } from '@nestjsx/crud';
 import { UsersService } from './users.service';
 import { User } from './user.entity';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiUseTags('users')
 @Controller('users')
@@ -37,7 +38,13 @@ import { User } from './user.entity';
         },
     },
 })
+@UseGuards(AuthGuard('jwt'))
 export class UsersController implements CrudController<User> {
 
     constructor(public service: UsersService) { }
+
+    @Get('me')
+    findMe(@Request() req) {
+        return req.user;
+    }
 }
