@@ -23,6 +23,6 @@ export class Ticket extends AbstractEntity {
     @ManyToOne(type => School, school => school.tickets)
     school: School;
 
-    @Column({ type: 'enum', enum: TicketStatus, default: TicketStatus.ASKED })
+    @Column({ type: 'enum', enum: TicketStatus, default: TicketStatus.waiting })
     status: TicketStatus;
 }
