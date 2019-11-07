@@ -1,5 +1,5 @@
 export enum TicketStatus {
     waiting = 'waiting',
-    pending = 'pending',
+    inprogress = 'inprogress',
     terminated = 'terminated',
 }
