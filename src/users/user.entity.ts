@@ -31,11 +31,11 @@ export class User {
     lastname: string;
 
     @ApiModelProperty()
-    @Column({ length: 30 })
+    @Column({ length: 30, nullable: true})
     github: string;
 
     @ApiModelProperty()
-    @Column({ length: 30})
+    @Column({ length: 30, nullable: true})
     role: string;
 
     @ApiModelProperty({ type: type => Group, isArray: true, required: false })

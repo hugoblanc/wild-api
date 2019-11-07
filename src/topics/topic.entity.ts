@@ -14,7 +14,7 @@ export class Topic extends AbstractEntity {
     resourceUrl: string;
 
     @ApiModelProperty()
-    @Column({ length: 150 })
+    @Column({ length: 150 , nullable: true})
     pictureUrl: string;
 
     @ApiModelProperty({ type: User })
