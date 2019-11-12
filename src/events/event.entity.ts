@@ -10,7 +10,7 @@ import { Group } from './../groups/group.entity';
 export class Event extends AbstractEntity {
 
     @ApiModelProperty({ required: false })
-    @Column({ length: 200 })
+    @Column({ length: 200, nullable: true })
     imageUrl: string;
 
     @ApiModelProperty({ type: 'string', format: 'date-time', example: '2018-11-21T06:20:32.232Z' })
