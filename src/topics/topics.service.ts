@@ -17,12 +17,12 @@ export class TopicsService extends TypeOrmCrudService<Topic> {
         super(repository);
     }
 
-    async addToFavorites(id: string, user: any) {
-        return this.addToList(id, 'favoriters', user);
+    async addToFavorites(id: string, userId: any) {
+        return this.addToList(id, 'favoriters', userId);
     }
 
-    async addToLikes(id: string, user?: any) {
-        return this.addToList(id, 'likers', user);
+    async addToLikes(id: string, userId?: any) {
+        return this.addToList(id, 'likers', userId);
     }
 
     async removeFromFavorites(id: string, user: any) {
@@ -34,14 +34,16 @@ export class TopicsService extends TypeOrmCrudService<Topic> {
     }
 
     private async addToList(id: string, key: string, userId?: any) {
+        console.log(id + ' ' + key + userId);
+
         const topic = await this.repository.findOne(parseInt(id, 10));
         const listeTopic = topic[key] || [];
-        listeTopic.push(await this.userService.findOne(userId || 11495));
+        listeTopic.push(await this.userService.findOne(userId));
         topic[key] = listeTopic;
         return this.repository.save(topic);
     }
 
-    private async removeFromList(id: string, key: string, userId = 11495) {
+    private async removeFromList(id: string, key: string, userId: number) {
         const topic = await this.repository.findOne(parseInt(id, 10));
         const listeTopic: User[] = topic[key] || [];
         const index = listeTopic.findIndex((u) => u.id === (userId));

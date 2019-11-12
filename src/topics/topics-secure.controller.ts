@@ -39,11 +39,13 @@ export class TopicsSecureController implements CrudController<Topic> {
 
     @Post('favorites/:idTopic')
     addToFavorite(@Param('idTopic') id: string, @Request() req) {
-        return this.service.addToFavorites(id, req.user);
+        console.log(req.user.payload.id);
+
+        return this.service.addToFavorites(id, req.user.payload.id);
     }
 
     @Post('likes/:idTopic')
     addTolike(@Param('idTopic') id: string, @Request() req) {
-        return this.service.addToFavorites(id, req.user.id);
+        return this.service.addToFavorites(id, req.user.payload.id);
     }
 }
