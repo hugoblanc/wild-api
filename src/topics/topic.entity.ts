@@ -31,7 +31,7 @@ export class Topic extends AbstractEntity {
     @JoinTable()
     favoriters: User[];
 
-    @ManyToMany(type => User, user => user.favoriteTopics)
+    @ManyToMany(type => User, user => user.likedTopics)
     @JoinTable()
     likers: User[];
 

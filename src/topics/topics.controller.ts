@@ -38,12 +38,12 @@ export class TopicsController implements CrudController<Topic> {
 
     @Post('favorites/:idTopic')
     addToFavorite(@Param('idTopic') id: string) {
-        return this.service.addToFavorites(id, 11495);
+        return this.service.addToFavorites(id, 14247);
     }
 
     @Post('likes/:idTopic')
     addToLike(@Param('idTopic') id: string) {
-        return this.service.addToLikes(id, 11495);
+        return this.service.addToLikes(id, 14247);
     }
 
     @Delete('favorites/:idTopic')
