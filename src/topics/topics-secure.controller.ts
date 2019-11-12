@@ -1,11 +1,11 @@
-import { Controller, UseGuards } from '@nestjs/common';
+import { Controller, Param, Post, Request, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiUseTags } from '@nestjs/swagger';
 import { Crud, CrudController } from '@nestjsx/crud';
 import { Topic } from './topic.entity';
 import { TopicsService } from './topics.service';
-import { AuthGuard } from '@nestjs/passport';
 
-@ApiUseTags('topics-secure')
+@ApiUseTags('topics')
 @Controller('topics-secure')
 @Crud({
     model: {
@@ -35,7 +35,15 @@ import { AuthGuard } from '@nestjs/passport';
 })
 @UseGuards(AuthGuard('jwt'))
 export class TopicsSecureController implements CrudController<Topic> {
-
     constructor(public service: TopicsService) { }
 
+    @Post('favorites/:idTopic')
+    addToFavorite(@Param('idTopic') id: string, @Request() req) {
+        return this.service.addToFavorites(id, req.user);
+    }
+
+    @Post('likes/:idTopic')
+    addTolike(@Param('idTopic') id: string, @Request() req) {
+        return this.service.addToFavorites(id, req.user.id);
+    }
 }
