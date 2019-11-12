@@ -25,6 +25,9 @@ import { Event } from './event.entity';
             group: {
                 eager: true,
             },
+            school: {
+
+            },
         },
     },
 })

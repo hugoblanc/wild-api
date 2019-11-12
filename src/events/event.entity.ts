@@ -1,3 +1,4 @@
+import { School } from './../school/school.entity';
 import { ApiModelProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 import { Column, Entity, ManyToOne } from 'typeorm';
@@ -22,14 +23,18 @@ export class Event extends AbstractEntity {
     @IsNotEmpty()
     endAt: Date;
 
-    @ManyToOne(type => User, user => user.events, { cascade: ['insert', 'update'] })
+    @ManyToOne(type => User, user => user.events)
     @IsNotEmpty()
     @ApiModelProperty({ type: User })
     user: User;
 
     // @ApiModelProperty({ type: Group })
-    @ManyToOne(type => Group, group => group.events, { cascade: ['insert', 'update'] })
+    @ManyToOne(type => Group, group => group.events )
     @IsNotEmpty()
     group: Group;
+
+    @ApiModelProperty({ type: School })
+    @ManyToOne(type => School, school => school.events)
+    school: School;
 
 }

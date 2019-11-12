@@ -2,6 +2,7 @@ import { ApiModelProperty } from '@nestjs/swagger';
 import { Column, PrimaryColumn, OneToMany, Entity } from 'typeorm';
 import { User } from '../users/user.entity';
 import { Ticket } from '../tickets/ticket.entity';
+import { Event } from '../events/event.entity';
 
 @Entity()
 export class School {
@@ -27,5 +28,9 @@ export class School {
     @ApiModelProperty({ type: [Ticket], required: false })
     @OneToMany(type => Ticket, ticket => ticket.school)
     tickets: Ticket[];
+
+    @ApiModelProperty({ type: [Event], required: false })
+    @OneToMany(type => Event, event => event.school)
+    events: Event[];
 
 }

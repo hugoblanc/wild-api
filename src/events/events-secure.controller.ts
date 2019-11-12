@@ -26,6 +26,8 @@ import { AuthGuard } from '@nestjs/passport';
             group: {
                 eager: true,
             },
+            school: {
+            },
         },
     },
 })

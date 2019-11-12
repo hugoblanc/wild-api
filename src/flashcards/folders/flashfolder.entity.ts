@@ -1,7 +1,7 @@
 import { AbstractEntity } from '../../core/abstract/abstract.entity';
 import { ApiModelProperty } from '@nestjs/swagger';
 import { User } from '../../users/user.entity';
-import { ManyToOne, Entity, OneToMany } from 'typeorm';
+import { ManyToOne, Entity, OneToMany, Column } from 'typeorm';
 import { IsNotEmpty } from 'class-validator';
 import { Group } from '../../groups/group.entity';
 import { Flashcard } from '../flashcards/flashcard.entity';
@@ -15,6 +15,7 @@ export class Flashfolder extends AbstractEntity {
     user: User;
 
     @ApiModelProperty()
+    @Column({ length: 200, nullable: true })
     tag: string;
 
     @ApiModelProperty({ type: Group })
