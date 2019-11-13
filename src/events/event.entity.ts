@@ -34,7 +34,6 @@ export class Event extends AbstractEntity {
 
     // @ApiModelProperty({ type: Group })
     @ManyToOne(type => Group, group => group.events, { nullable: true } )
-    @IsNotEmpty()
     group: Group;
 
     @ApiModelProperty({ type: School, nullable: true })
