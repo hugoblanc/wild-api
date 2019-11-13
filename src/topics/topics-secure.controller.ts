@@ -51,11 +51,11 @@ export class TopicsSecureController implements CrudController<Topic> {
 
     @Delete('favorites/:idTopic')
     removeFromFavorite(@Param('idTopic') id: string, @Request() req) {
-        return this.service.removeFromFavorites(id, req.payload.id);
+        return this.service.removeFromFavorites(id, req.user.payload.id);
     }
 
     @Delete('likes/:idTopic')
     removeFromLike(@Param('idTopic') id: string, @Request() req) {
-        return this.service.removeFromLikes(id, req.payload.id);
+        return this.service.removeFromLikes(id, req.user.payload.id);
     }
 }
