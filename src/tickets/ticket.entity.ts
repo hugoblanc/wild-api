@@ -16,11 +16,11 @@ export class Ticket extends AbstractEntity {
     user: User;
 
     @ApiModelProperty({ type: Group })
-    @ManyToOne(type => Group, group => group.tickets)
+    @ManyToOne(type => Group, group => group.tickets, { nullable: true })
     group: Group;
 
     @ApiModelProperty({ type: School })
-    @ManyToOne(type => School, school => school.tickets)
+    @ManyToOne(type => School, school => school.tickets, { nullable: true })
     school: School;
 
     @Column({ type: 'enum', enum: TicketStatus, default: TicketStatus.waiting })

@@ -1,4 +1,4 @@
-import { Controller, Param, Post, Request, UseGuards } from '@nestjs/common';
+import { Controller, Param, Post, Request, UseGuards, Delete } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiUseTags } from '@nestjs/swagger';
 import { Crud, CrudController } from '@nestjsx/crud';
@@ -46,6 +46,16 @@ export class TopicsSecureController implements CrudController<Topic> {
 
     @Post('likes/:idTopic')
     addTolike(@Param('idTopic') id: string, @Request() req) {
-        return this.service.addToFavorites(id, req.user.payload.id);
+        return this.service.addToLikes(id, req.user.payload.id);
+    }
+
+    @Delete('favorites/:idTopic')
+    removeFromFavorite(@Param('idTopic') id: string, @Request() req) {
+        return this.service.removeFromFavorites(id, req.payload.id);
+    }
+
+    @Delete('likes/:idTopic')
+    removeFromLike(@Param('idTopic') id: string, @Request() req) {
+        return this.service.removeFromLikes(id, req.payload.id);
     }
 }

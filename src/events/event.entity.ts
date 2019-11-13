@@ -29,12 +29,12 @@ export class Event extends AbstractEntity {
     user: User;
 
     // @ApiModelProperty({ type: Group })
-    @ManyToOne(type => Group, group => group.events )
+    @ManyToOne(type => Group, group => group.events, { nullable: true } )
     @IsNotEmpty()
     group: Group;
 
-    @ApiModelProperty({ type: School })
-    @ManyToOne(type => School, school => school.events)
+    @ApiModelProperty({ type: School, nullable: true })
+    @ManyToOne(type => School, school => school.events, { nullable: true })
     school: School;
 
 }
