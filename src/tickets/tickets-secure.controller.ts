@@ -1,4 +1,4 @@
-import { Controller, UseGuards } from '@nestjs/common';
+import { Controller, UseGuards, Get, Param } from '@nestjs/common';
 import { ApiUseTags } from '@nestjs/swagger';
 import { TicketsService } from './tickets.service';
 import { Ticket } from './ticket.entity';
@@ -34,6 +34,11 @@ import { AuthGuard } from '@nestjs/passport';
 export class TicketsSecureController implements CrudController<Ticket> {
 
     constructor(public service: TicketsService) {
+    }
+
+    @Get('ticket/:id')
+    findById(@Param('id') id: number) {
+        return this.service.findOne(id);
     }
 
 }

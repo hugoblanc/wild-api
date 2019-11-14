@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { ApiUseTags } from '@nestjs/swagger';
 import { TicketsService } from './tickets.service';
 import { Ticket } from './ticket.entity';
@@ -32,6 +32,11 @@ import { Crud, CrudController } from '@nestjsx/crud';
 export class TicketsController implements CrudController<Ticket> {
 
     constructor(public service: TicketsService) {
+    }
+
+    @Get('ticket/:id')
+    findById(@Param('id') id: number) {
+        return this.service.findOne(id);
     }
 
 }
