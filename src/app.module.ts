@@ -11,6 +11,7 @@ import { GroupsModule } from './groups/groups.module';
 import { CoreModule } from './core/core.module';
 import { OdysseyModule } from './odyssey/odyssey.module';
 import { SchoolModule } from './school/school/school.module';
+import { CommentModule } from './comment/comment.module';
 
 @Module({
     imports: [
@@ -36,6 +37,7 @@ import { SchoolModule } from './school/school/school.module';
         CoreModule,
         OdysseyModule,
         SchoolModule,
+        CommentModule,
     ],
     controllers: [AppController],
     providers: [AppService],

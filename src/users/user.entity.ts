@@ -7,6 +7,7 @@ import { Ticket } from '../tickets/ticket.entity';
 import { Topic } from '../topics/topic.entity';
 import { Flashfolder } from './../flashcards/folders/flashfolder.entity';
 import { School } from '../school/school.entity';
+import { Comment } from '../comment/comment.entity';
 
 @Entity()
 export class User {
@@ -68,6 +69,10 @@ export class User {
 
     @ManyToMany(type => Topic, topic => topic.likers)
     likedTopics: Topic[];
+
+    @ApiModelProperty({ type: [Comment], required: false })
+    @OneToMany(type => Comment, comment => comment.user)
+    comments: Comment[];
 
     assignOdysseyDTo(odysseyDTO: OdysseyMeDTO) {
         this.id = odysseyDTO.id;

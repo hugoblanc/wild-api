@@ -1,11 +1,12 @@
 import { Group } from './../groups/group.entity';
-import { Entity, ManyToOne, Column } from 'typeorm';
+import { Entity, ManyToOne, Column, OneToMany } from 'typeorm';
 import { AbstractEntity } from '../core/abstract/abstract.entity';
 import { User } from '../users/user.entity';
 import { ApiModelProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 import { TicketStatus } from './ticket-status.enum';
 import { School } from '../school/school.entity';
+import { Comment } from '../comment/comment.entity';
 
 @Entity()
 export class Ticket extends AbstractEntity {
@@ -25,4 +26,8 @@ export class Ticket extends AbstractEntity {
 
     @Column({ type: 'enum', enum: TicketStatus, default: TicketStatus.waiting })
     status: TicketStatus;
+
+    @ApiModelProperty({ type: [Comment], required: false })
+    @OneToMany(type => Comment, comment => comment.ticket)
+    comments: Comment[];
 }
