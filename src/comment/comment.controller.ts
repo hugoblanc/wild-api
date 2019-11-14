@@ -1,8 +1,11 @@
-import { Controller } from '@nestjs/common';
+import { Controller, UseGuards } from '@nestjs/common';
 import { CommentService } from './comment.service';
 import { Comment } from './comment.entity';
 import { Crud, CrudController } from '@nestjsx/crud';
+import { ApiUseTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
+@ApiUseTags('topics', 'tickets-secure')
 @Controller('comment')
 @Crud({
     model: {
@@ -29,6 +32,7 @@ import { Crud, CrudController } from '@nestjsx/crud';
         },
     },
 })
+@UseGuards(AuthGuard('jwt'))
 export class CommentController implements CrudController<Comment> {
 
     constructor(public service: CommentService) { }
