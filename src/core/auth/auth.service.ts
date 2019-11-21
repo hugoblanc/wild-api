@@ -28,20 +28,18 @@ export class AuthService {
 
     }
 
-    handleOAuthCallback(code: string) {
+    handleOAuthCallback(path: string, code: string) {
 
         // Get token
-        const oauth$ = this.getOauth(code);
+        const oauth$ = this.getOauth(path, code);
 
         // Get du user via token
         const odysseyDTO$ = oauth$.pipe(flatMap((odyResponse: OauthResponse) => {
             const axiosConfig = this.createBearerConfig(odyResponse.accessToken);
-            console.log(odyResponse);
             this.logger.log('Get odyssey answer: OK');
             return this.odysseyService.getCurrentUser(axiosConfig);
         }),
             catchError((error) => {
-                console.error(error);
                 throw error;
             },
             ));
@@ -55,7 +53,6 @@ export class AuthService {
 
         // Génération du jwt
         const signedToken$ = user$.pipe(map((user: User) => {
-            console.log(user);
             return this.login(user);
         }));
 
@@ -64,17 +61,16 @@ export class AuthService {
     }
 
     /**
-    * *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    * *                                      Récupération des crédential Oauth
-    * *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    */
+     * *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * *                                      Récupération des crédential Oauth
+     * *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     */
 
-    private getOauth(code: string) {
-        const config = this.createOauthConf(code);
+    private getOauth(path: string, code: string) {
+        const config = this.createOauthConf(path, code);
 
         return this.http.post(AuthService.OAUTH_HOST + 'token', config.data, config)
             .pipe(map((response) => {
-                console.log(response.data);
                 this.logger.log('Get Oauth data: ok');
                 const result = new OauthResponse(response.data);
                 this.logger.log('Parsing Oauth data: ok');
@@ -88,10 +84,10 @@ export class AuthService {
         };
     }
 
-    private createOauthConf(code: string) {
+    private createOauthConf(path: string, code: string) {
         const credentials = {
             code,
-            redirect_uri: 'https://wild-api.witpoc.com/auth/oauth',
+            redirect_uri: `https://wild-api.witpoc.com/auth/${path}/oauth`,
             // redirect_uri: 'http://localhost:3000/auth/oauth',
             grant_type: 'authorization_code',
             client_secret: '44f6416225beb466428c70c92e0a7a50c42c88573f2f99784b24095ba446c2dd',
@@ -109,10 +105,10 @@ export class AuthService {
     }
 
     /**
-    * *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    * *                      Récupération des informations utilisateur
-    * *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    */
+     * *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * *                      Récupération des informations utilisateur
+     * *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     */
 
     private createBearerConfig(token: string): AxiosRequestConfig {
         const axiosConfig: AxiosRequestConfig = {
