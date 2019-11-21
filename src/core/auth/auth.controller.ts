@@ -8,14 +8,14 @@ export class AuthController {
 
     }
 
-    @Get('/ticket/oauth')
+    @Get('ticket/oauth')
     @Redirect('https://ticket-tracker.witpoc.com/')
     async setupTicketOAuth(@Query('code') query) {
         const token = await this.service.handleOAuthCallback('ticket', query).toPromise();
         return { url: 'https://ticket-tracker.witpoc.com/auth/' + token.access_token };
     }
 
-    @Get('/watcher/oauth')
+    @Get('watcher/oauth')
     @Redirect('https://watcher.witpoc.com/')
     async setupWatcherOAuth(@Query('code') query) {
         const token = await this.service.handleOAuthCallback('watcher', query).toPromise();
