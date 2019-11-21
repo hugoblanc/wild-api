@@ -26,4 +26,8 @@ export class AuthController {
     @Redirect(AuthService.GLOBAL_AUTH, 302)
     getAuth() { }
 
+    @Get('ticket')
+    @Redirect(AuthService.TICKET_AUTH, 302)
+    getAuthTicket() { }
+
 }
